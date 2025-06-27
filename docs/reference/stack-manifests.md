@@ -42,8 +42,7 @@ default snap configurations
 Device entries may also have the following device-specific fields:  
 
 **For CPUs:**  
-`architectures`  
-CPU architecture in Debian nomenclature (amd64, arm64). This field is  mandatory. 
+`architectures`: CPU architecture in Debian nomenclature (amd64, arm64). This field is  mandatory. 
 The remaining fields are architecture specific.
 
 - amd64:  
