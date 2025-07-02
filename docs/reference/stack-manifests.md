@@ -77,7 +77,7 @@ field is  mandatory. The remaining fields are architecture specific.
 
 * `bus` - the bus or protocol used by the device (supported values: `pci`, default: `pci`)  
 * `vram` - minimum required Video RAM  
-* `compute-capability` - applicable to NVIDIA (vendor-id 0x10de) only. A list 
+* `compute-capability` - applicable to NVIDIA (vendor-id `0x10de`) only. A list 
 of MAJOR.MINOR version strings prefixed with a comparison operator (==, \<=, \>=, \>, \<[^1]). 
 MAJOR and MINOR must both be integers.
 
@@ -104,8 +104,8 @@ that requirement via a CPU entry.
 **G** or **M** as suffixes.  
 * Device Bus is to uniquely identify the vendor, as Vendor IDs are only unique
 within their own subsystem. For example, the Nvidia vendor ID is 0x10DE for PCI
-and 0x0955 for USB devices. For graphics accelerators, we only expect pci or
-usb as the possible values. For the full list from Linux, 
+and 0x0955 for USB devices. For graphics accelerators, we only expect `pci` or
+`usb` as the possible values. For the full list from Linux, 
 refer [here](https://github.com/torvalds/linux/blob/158f238aa69d91ad74e535c73f552bd4b025109c/scripts/mod/file2alias.c#L1546-L1599).
 
 Example YAML {spellexception}`serialization` of a stack manifest:
