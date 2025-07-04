@@ -71,8 +71,7 @@ field is  mandatory. The remaining fields are architecture specific.
 ### PCI peripherals
 
 * `bus`: `pci`  
-* `vendor-id` - PCI vendor ID hex number. Vendor IDs are only unique within 
-their own subsystem.
+* `vendor-id` - PCI vendor ID hex number.
 * `device-id` - PCI device ID hex number  
 * `device-class` - not used  
 * `subvendor-id` - not used  
@@ -87,16 +86,13 @@ their own subsystem.
 of MAJOR.MINOR version strings prefixed with a comparison operator (==, \<=, \>=, \>, \<[^1]). 
 MAJOR and MINOR must both be integers.
 
-Device bus is to uniquely identify the vendor since vendor IDs are only unique 
-within their own subsystems. For graphics accelerators, we only expect `pci` or 
-`usb` as the possible values. When bus is set to PCI, this object inherits all 
-PCI peripheral fields. 
+When bus is set to PCI, this object inherits all [PCI peripheral](#pci-peripherals) fields. 
 
 ### NPUs
 
 * `bus` - the bus or protocol used by the device (supported values: `pci`, default: `pci`)
 
-When bus is set to PCI, this object inherits all PCI peripheral fields.
+When bus is set to PCI, this object inherits all [PCI peripheral](#pci-peripherals) fields.
 
 ## Example YAML {spellexception}`serialization` of a stack manifest
 
