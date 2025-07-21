@@ -13,3 +13,8 @@ install-intel-npu-drivers
 install-nvidia-gpu-drivers
 ```
 
+Use the snap:
+```{toctree}
+:maxdepth: 1
+use-network-api
+```

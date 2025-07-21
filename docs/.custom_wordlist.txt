@@ -20,14 +20,17 @@ GPG
 gpu
 GPUs
 gyre
+hostname
 https
 html
+http
 io
 Intersphinx
 lang
 LaTeX
 latexmk
 llamafile
+localhost
 LLM
 Multipass
 NDA
@@ -60,6 +63,7 @@ txt
 uncommenting
 userspace
 utils
+userspace
 VMs
 vRAM
 WCAG
