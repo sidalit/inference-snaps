@@ -1,5 +1,5 @@
 (install-deepseek-r1-snap)=
-# Deepseek-R1 snap
+# Install Deepseek-R1 snap
 
 The Deepseek-R1 snap installs a hardware-optimized runtime for inference with the [Deepseek-R1](https://github.com/deepseek-ai/DeepSeek-R1) Large Language Model.
 It supports a range of hardware, in many cases with the help of drivers installed on the host.
@@ -82,11 +82,11 @@ stacks.<name>.compatible      true
 ...
 ```
 
-This will print many fields describing what this stack is consisted of.
-It is important to look at the `compatible` field to know if this stack will work on your hardware.
+This will print many fields describing what this stack consists of.
+Check the `compatible` field to know if this stack will work on your hardware.
 
-To change the stack that is used, set the stack option to the name of the stack you want.
-Use this command **without** the `stack.` prefix:
+To change the stack used, set the stack option to the name of the stack you want.
+Use this command **without** the `stacks.` prefix:
 
 ```bash
 sudo snap set deepseek-r1 stack=<name>
@@ -102,7 +102,7 @@ For example, to query the top level config:
 sudo snap get deepseek-r1
 ```
 
-Not all these configs can be changed, as they are defined by the selected stack.
+Not all configs can be changed, as they are defined by the selected stack.
 
 ### HTTP server configurations
 
@@ -136,7 +136,7 @@ sudo snap restart deepseek-r1
 
 ### Model layers on GPU
 
-CUDA-based stacks allow limiting the number of model layers that are loaded onto the GPU, by using the `n-gpu-layers` snap option.
+CUDA-based stacks allow you to limit the number of model layers that are loaded onto the GPU by using the `n-gpu-layers` snap option.
 This is useful if the GPU does not have enough vRAM.
 The remaining layers will run on the CPU.
 ```bash
