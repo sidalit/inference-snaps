@@ -11,6 +11,7 @@ cpu
 CPUs
 cryptographically
 CUDA
+customizations
 DeepSeek
 dvipng
 fonts
@@ -28,6 +29,7 @@ http
 https
 IDE
 IDEs
+inferencing
 Intersphinx
 io
 JetBrains
@@ -83,6 +85,7 @@ unported
 userspace
 utils
 VL
+VLM
 VMs
 vRAM
 WCAG
