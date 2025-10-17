@@ -1,7 +1,7 @@
 (configure-openwebui)=
 # Configure Open WebUI for use with Inference Snaps
 
-[Open WebUI][open-webui-docs] provides a convenient web interface for interacting with Inference Snaps that offer an OpenAI endpoint.
+[Open WebUI][open-webui-docs] provides a convenient web interface for interacting with Inference Snaps that have an OpenAI endpoint.
 This guide will help you set up and use an Inference Snap with Open WebUI.
 
 You must have Open WebUI and an Inference Snap installed to continue.
@@ -34,7 +34,7 @@ Enable `Direct Connections` and save your changes.
 Open settings in Open WebUI, select `Connections`, and click on the **+** icon to add a new connection.
 
 In the `URL` field, enter the URL of the endpoint you want to use, then save it.
-The URL can be found using the Inference Snap's `status` command.
+You can find the URL using the Inference Snap's `status` command.
 Refer to {ref}`using OpenAI API <use-openai-api>` for details.
 
 ## Use the model
