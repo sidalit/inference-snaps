@@ -1,22 +1,21 @@
 (qwen-vl-tutorial)=
-# Get started with Qwen VL inference snap
+# Get started with Qwen VL Inference Snap
 
-This tutorial will guide you through the steps to install and use an inference snap.
-We will specifically be using *Qwen 2.5 VL*, which is a multi-modal large language model.
-This model is also known as a Vision Language Model (VLM), as it can ingest and interpret images, along with text prompt.
+This tutorial walks you through the process of installing and using an inference snap.
+Specifically, you will install and run *Qwen 2.5 VL*, a [multi-modal large language model](https://www.nvidia.com/en-us/glossary/multimodal-large-language-models/).
+This model is referred to as a Vision Language Model (VLM) because it can ingest and interpret images, along with text prompts.
 
-## Prepare your computer
+## Set up your computer
 
-We assume you are using a computer with an operating system that supports snaps, like Ubuntu 24.04.
-You will require drivers for your hardware.
-These are often included in the operating system, but some devices require additional drivers to be installed.
+To complete this tutuorial you will need:
+- A computer running an operating system that supports snaps,e.g., Ubuntu 24.04.
+- Hardware drivers. These may be pre-installed in your OS, but some devices require {ref}`additional drivers <install-drivers>`.
+- A Docker installation
 
-Have a look at {ref}`install-drivers` for guidance.
+## Install the snap
 
-## Installing the snap
-
-We install Qwen VL from the `2.5` track, which indicates the version of the model.
-The snap is currently released with `beta` stability, indicated by the channel.
+Install the Qwen VL snap from the `2.5` track (which refers to the version of the model).
+It is currently released with `beta` stability as indicated by the channel:
 
 ```{terminal}
 :input: sudo snap install qwen-vl --channel 2.5/beta
@@ -24,19 +23,18 @@ The snap is currently released with `beta` stability, indicated by the channel.
 qwen-vl (2.5/beta) 2.5 from Canonical IoT Labs✓ installed
 ```
 
-During installation, the snap detects information about your system like installed hardware and available memory.
-Based on this, an appropriate {ref}`engine <engines>` is chosen.
-An *engine* in the context of Inference Snaps is a combination of model weights and a runtime, 
-along with some utilities to make it work, like a server exposing a standard API.
-Hardware vendors publish optimizations for some of these parts.
-These optimization are packaged in silicon-specific engines.
+During installation, the snap detects information about your system such as installed hardware and available memory.
+It uses this information to select an appropriate engine for your setup. 
 
+In this context, {ref}`engine <engines>` refers to a combination of model weights and a runtime, along with some utilities to make it work, like a server exposing a standard API.
 
 ## Check the status
 
-After installation of the snap, a server is started that can be used for inferencing with the model.
-This server comes from the selected engine.
-To see the selected engine and the status of this server, run the status command:
+Once the installation is complete, the server used to inference with the model starts automatically.
+This server comes from the engine.
+
+Run the status command to see the selected engine and the status of the server.
+If the server is online, the output should include the URL where the model can be accessed:
 
 ```{terminal}
 :input: qwen-vl status
@@ -46,15 +44,13 @@ endpoints:
     openai: http://localhost:8326/v3
 ```
 
-In this case we see the `intel-cpu` engine was selected automatically.
-Your system might get a different engine.
-If the server started successfully, the status command includes the URL where the model can be accessed.
-
+In this case, the `intel-cpu` engine was automatically selected during installation.
+You may end up with a different engine.
 
 ## Chat with the LLM
 
-The `qwen-vl` snap includes a simple chat client that can be used to chat with the LLM.
-A chat session can be started with the `chat` command:
+The `qwen-vl` snap includes a basic chat client that can be used to chat with the LLM.
+Use the `chat` command to start a chat session:
 
 ```{terminal}
 :input: qwen-vl chat
@@ -66,56 +62,53 @@ Hello! How can I assist you today?
 »  
 ```
 
-This chat client is an example that only supports text input.
-For more advanced queries, like ones that include images, we need to use a more advanced client.
+This chat client only supports text input.
+For queries that include images, you'll need to set up a more advanced client.
 
 ## Run and configure Open WebUI
 
-Open WebUI is an advanced client interface for working with LLMs.
-It can be run as a Docker container:
+Open WebUI is an advanced client interface for working with LLMs that can be run as a Docker container.
+Run the Open WebUI Docker container:
 
 ```shell
 docker run --network=host --env PORT=9099 ghcr.io/open-webui/open-webui:0.6
 ```
 
-This command has a few customizations:
-* `--network=host` is required so that the Docker container can access the URL of the inference snap on the host machine
-* `--env PORT=9099` is to change the port which Open WebUI listens on, preventing collisions with other services on your host machine using the default `8080` port
+* `--network=host` allows the Docker container to access the URL of the inference snap on the host machine
+* `--env PORT=9099` changes the port that Open WebUI listens on from the default `8080` to `9099` to prevent collisions with other services on your host machine.
 
-After running the Open WebUI Docker container with the command above, the web interface can be accessed at [http://localhost:9099](http://localhost:9099).
-
-Use the URL you obtained from the `status` command to configure a new connection in the settings of Open WebUI.
-This is described in {ref}`configure-openwebui`.
+Confirm that you can access the web interface at [http://localhost:9099](http://localhost:9099), and {ref}`configure a new connection in Open WebUI <configure-openwebui>`. You will need the URL from the status command.
 
 ## Prompt Qwen VL with an image
 
-On the Open WebUI interface, start a *New Chat*.
-At the top there is a dropdown menu listing available models.
-If your configuration in the previous step was done correctly, you should see Qwen 2.5 VL being listed.
-Select it.
+Once the new connection is set, start a *New Chat* on the Open WebUI interface.
+In the dropdown menu at the top listing available models, select Qwen 2.5 VL.
 
-The chat screen has a text field to type your question.
-Attachments like images can be added for additional context by clicking on the `+` button.
+``` {note}
+If the model is not listed, check if the configuration in the previous step was done incorrectly.
+```
+
+The chat screen has a text field, but you can add images and other attachments for additional context by clicking on the `+` button.
 
 ```{image} attach-image.png
 :alt: Selecting an image attachment
 :align: center
 ```
 
-As an example we attach [this image](https://commons.wikimedia.org/wiki/File:Portugal,_Porto,_Dominic_Lu%C3%ADs_l_Bridge_(52594422458).jpg) of a bridge.
-We ask the question "What is the significance of the triangles?", hoping that the model would explain the architectural reason structures are tessellated.
+Download and add this image of the [Dom Luís I Bridge](https://commons.wikimedia.org/wiki/File:Portugal,_Porto,_Dominic_Lu%C3%ADs_l_Bridge_(52594422458).jpg) as an attachment, and enter a suitable question in the chat screen.
+The model will take some time to process the query before it starts printing a response.
 
-After submitting the image and text prompt, it takes a bit of time to process the query, and then starts printing a response.
-In this example we can see that the model spotted something in the image that we did not necessarily anticipate.
+In this example, the prompt used was "What is the significance of the triangles?". 
+The expectation was that the LLM would explain the architectural reason for the triangular sections in the bridge.
+However, this prompt does not account for the presence of triangular shapes that are not part of the bridge.
 
 ```{image} response.png
 :alt: Response of the model
 :align: center
 ```
 
-## Conclusion
+## Next steps
 
-In this tutorial you learned how to install an inference snap.
-A suitable engine was automatically installed, and its status and functionality were verified.
-A more advanced client was installed that allows you to perform advanced queries.
-As an example an image was attached to the text prompt, allowing you to ask questions related to the image.
+To become more familiar with inference snaps:
+- Learn how to {ref}`switch to a different engine <switch-between-engines>` after installation
+- Configure an inference snap to {ref}`work with your IDE <use-in-ide>`
