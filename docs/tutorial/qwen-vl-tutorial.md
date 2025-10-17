@@ -2,13 +2,13 @@
 # Get started with Qwen VL Inference Snap
 
 This tutorial walks you through the process of installing and using an inference snap.
-Specifically, you will install and run *Qwen 2.5 VL*, a [multi-modal large language model](https://www.nvidia.com/en-us/glossary/multimodal-large-language-models/).
-This model is referred to as a Vision Language Model (VLM) because it can ingest and interpret images, along with text prompts.
+Specifically, you will install and run *Qwen 2.5 VL*, a [multi-modal large language model (LLM)](https://www.nvidia.com/en-us/glossary/multimodal-large-language-models/).
+This model is also referred to as a Vision Language Model (VLM) because it can ingest and interpret images, along with text prompts.
 
 ## Set up your computer
 
-To complete this tutuorial you will need:
-- A computer running an operating system that supports snaps,e.g., Ubuntu 24.04.
+To complete this tutorial you will need:
+- A computer running an operating system that supports snaps, e.g., Ubuntu 24.04. Older Ubuntu versions aren't supported.
 - Hardware drivers. These may be pre-installed in your OS, but some devices require {ref}`additional drivers <install-drivers>`.
 - A Docker installation
 
@@ -34,7 +34,7 @@ Once the installation is complete, the server used to inference with the model s
 This server comes from the engine.
 
 Run the status command to see the selected engine and the status of the server.
-If the server is online, the output should include the URL where the model can be accessed:
+The output should include the server's status and the URL where the API can be accessed:
 
 ```{terminal}
 :input: qwen-vl status
@@ -67,17 +67,18 @@ For queries that include images, you'll need to set up a more advanced client.
 
 ## Run and configure Open WebUI
 
-Open WebUI is an advanced client interface for working with LLMs that can be run as a Docker container.
-Run the Open WebUI Docker container:
+Open WebUI is an advanced client interface for working with LLMs.
+Run the Open WebUI as a Docker container:
 
 ```shell
 docker run --network=host --env PORT=9099 ghcr.io/open-webui/open-webui:0.6
 ```
 
-* `--network=host` allows the Docker container to access the URL of the inference snap on the host machine
+* `--network=host` allows the Docker container to access the URL of the inference snap's HTTP server on the host machine
 * `--env PORT=9099` changes the port that Open WebUI listens on from the default `8080` to `9099` to prevent collisions with other services on your host machine.
 
-Confirm that you can access the web interface at [http://localhost:9099](http://localhost:9099), and {ref}`configure a new connection in Open WebUI <configure-openwebui>`. You will need the URL from the status command.
+Confirm that you can access the web interface at [http://localhost:9099](http://localhost:9099), and {ref}`configure a new connection in Open WebUI <configure-openwebui>`.
+You will need the URL from the status command.
 
 ## Prompt Qwen VL with an image
 
@@ -95,12 +96,12 @@ The chat screen has a text field, but you can add images and other attachments f
 :align: center
 ```
 
-Download and add this image of the [Dom Luís I Bridge](https://commons.wikimedia.org/wiki/File:Portugal,_Porto,_Dominic_Lu%C3%ADs_l_Bridge_(52594422458).jpg) as an attachment, and enter a suitable question in the chat screen.
+Download and add this image of the [{spellexception}`Dom Luís I Bridge`](https://commons.wikimedia.org/wiki/File:Portugal,_Porto,_Dominic_Lu%C3%ADs_l_Bridge_(52594422458).jpg) as an attachment, and enter a suitable question in the chat screen.
 The model will take some time to process the query before it starts printing a response.
 
 In this example, the prompt used was "What is the significance of the triangles?". 
 The expectation was that the LLM would explain the architectural reason for the triangular sections in the bridge.
-However, this prompt does not account for the presence of triangular shapes that are not part of the bridge.
+However, the model spotted the triangular buoy and responded according to that instead of the bridge.
 
 ```{image} response.png
 :alt: Response of the model
